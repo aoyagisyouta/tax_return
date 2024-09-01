@@ -11,6 +11,19 @@
   </head>
 
   <body>
+     <header class="header">
+      <div class="header__bar row">
+        <h1 class="title"><%= link_to 'Tax Return', root_path %></h1>
+        <div class="user_nav grid-6">
+          <% if user_signed_in? %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'button' %>
+          <% else %>
+            <%= link_to 'ログイン', new_user_session_path, class: 'button' %>
+            <%= link_to '新規登録', new_user_registration_path, class: 'button' %>
+          <% end %>
+        </div>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>
