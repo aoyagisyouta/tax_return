@@ -1,24 +1,60 @@
-# README
+## usersテーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| email               | string     | null: false, unique: true      |
+| encrypted_password  | string     | null: false                    |
+| user_name           | string     | null: false                    |
 
-Things you may want to cover:
+### Association
+- has_many :properties
 
-* Ruby version
+## propertiesテーブル
 
-* System dependencies
+| Column            | Type       | Options                        |
+| ----------------- | ---------- | ------------------------------ |
+| name              | string     | null: false                     |
+| postal_code       | string     | null: false                     |
+| prefecture_id     | integer    | null: false, foreign_key: true  |
+| city              | string     | null: false                     |
+| street_number     | string     | null: false                     |
+| room_number       | string     |                                |
+| building_type_id  | integer    | null: false, foreign_key: true  |
+| user_id           | references | null: false, foreign_key: true  |
 
-* Configuration
+### Association
+- belongs_to :user
+- has_one :income
+- has_one :expense
 
-* Database creation
+## incomeテーブル
 
-* Database initialization
+| Column         | Type       | Options                         |
+| -------------- | ---------- | ------------------------------  |
+| rent           | integer    | null: false, default: 0         |
+| key_money      | integer    | null: false, default: 0         |
+| renewal_fee    | integer    | null: false, default: 0         |
+| other_income   | integer    | null: false, default: 0         |
+| property_id    | references | null: false, foreign_key: true  |
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
+- belongs_to :property
 
-* Deployment instructions
+## expensesテーブル
 
-* ...
+| Column              | Type       | Options                        |
+| ------------------- | ---------- | ------------------------------ |
+| taxes               | integer    | null: false, default: 0        |
+| loan_interest_rate  | decimal    | precision: 5, scale: 2         |
+| management_fee      | integer    | null: false, default: 0        |
+| brokerage           | integer    | null: false, default: 0        |
+| advertising         | integer    | null: false, default: 0        |
+| premium             | integer    | null: false, default: 0        |
+| depreciation        | integer    | null: false, default: 0        |
+| repair_cost         | integer    | null: false, default: 0        |
+| other_expenses      | integer    | null: false, default: 0        |
+| property_id         | references | null: false, foreign_key: true |
+
+### Association
+- belongs_to :property
