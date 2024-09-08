@@ -1,0 +1,14 @@
+<h1>物件詳細</h1>
+
+<%= @property.name %>
+<%= @property.postal_code %>
+<%= @property.prefecture[:name] %>
+<%= @property.city %>
+<%= @property.street_number %>
+<%= @property.room_number %>
+<%= @property.building_type[:id] %>
+<% if @property.image.attached? %>
+  <%= image_tag @property.image, class: 'propeerty-image'if @property.image.attached? %>
+<% else %>
+  画像なし
+<% end %>

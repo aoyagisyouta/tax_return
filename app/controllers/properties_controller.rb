@@ -30,6 +30,9 @@ class PropertiesController < ApplicationController
     redirect_to root_path
   end
 
+  def show
+  end
+
   private
 
   def property_params
