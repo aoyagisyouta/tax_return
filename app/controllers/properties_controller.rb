@@ -15,6 +15,6 @@ class PropertiesController < ApplicationController
   private 
   def property_params
     params.require(:property).permit(:name, :postal_code, :prefecture_id,
-    :city, :street_number, :room_number, :building_type_id).merge(user_id: current_user.id)
+    :city, :street_number, :room_number, :building_type_id, :image).merge(user_id: current_user.id)
   end
 end
