@@ -16,6 +16,16 @@ class PropertiesController < ApplicationController
     end
   end
 
+  def edit 
+    @property = Property.find(params[:id])
+  end
+
+  def update
+    property = Property.find(params[:id])
+    property.update(property_params)
+    redirect_to root_path
+  end
+
   private 
   def property_params
     params.require(:property).permit(:name, :postal_code, :prefecture_id,
