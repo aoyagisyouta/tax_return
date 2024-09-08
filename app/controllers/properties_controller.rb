@@ -8,8 +8,12 @@ class PropertiesController < ApplicationController
   end
 
   def create 
-    Property.create(property_params)
-    redirect_to '/'
+    @property = Property.new(property_params)
+    if @property.save
+      redirect_to '/'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private 

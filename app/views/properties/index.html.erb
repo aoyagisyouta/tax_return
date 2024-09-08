@@ -1,10 +1,42 @@
-<div class="contents row">
-  <% @properties.each do |property| %>
-    <div class="content_post" style="background-image: url(<%=  %>);">
-      <p><%=  %></p>
-      <span class="name">
-        <%=  %>
-      </span>
-    </div>
-  <% end %>
-</div>
+<h1>物件一覧</h1>
+
+<% if @properties.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>物件名</th>
+        <th>郵便番号</th>
+        <th>都道府県</th>
+        <th>市区町村</th>
+        <th>丁目番地</th>
+        <th>部屋番号</th>
+        <th>建物の種類</th>
+        <th>画像</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @properties.each do |property| %>
+        <tr>
+          <td><%= property.name %></td>
+          <td><%= property.postal_code %></td>
+          <td><%= property.prefecture[:name] %></td>
+          <td><%= property.city %></td>
+          <td><%= property.street_number %></td>
+          <td><%= property.room_number %></td>
+          <td><%= property.building_type[:name] %></td>
+          <td>
+            <% if property.image.attached? %>
+              <%= image_tag property.image, class: 'propeerty-image'if property.image.attached? %>
+            <% else %>
+              画像なし
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>物件がありません。</p>
+<% end %>
+
+<%# link_to '新規物件登録', new_property_path, class: 'button' %>
