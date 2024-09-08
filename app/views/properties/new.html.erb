@@ -1,0 +1,26 @@
+<div class="contents row">
+  <div class="container">
+    <h3>投稿する</h3>
+    <% if @property.errors.any? %>
+      <div class="error-messages">
+        <ul>
+          <% @property.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <%= form_with(model: @property, local: true) do |form| %>
+      <%= form.text_field :name, placeholder: "物件名" %>
+      <%= form.text_field :postal_code, placeholder: "郵便番号" %>
+      <%= form.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"}) %>
+      <%= form.text_field :city, placeholder: "市町村" %>
+      <%= form.text_field :street_number, placeholder: "番地" %>
+      <%= form.text_field :room_number, placeholder: "部屋番号" %>
+      <%= form.collection_select(:building_type_id, BuildingType.all, :id, :name, {}, {class:"building_type-select"}) %>
+      <%= form.file_field :image %>
+      <%= form.submit "SEND" %>
+    <% end %>
+    
+  </div>
+</div>

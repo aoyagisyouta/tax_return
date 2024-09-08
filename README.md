@@ -19,7 +19,7 @@
 | city              | string     | null: false                     |
 | street_number     | string     | null: false                     |
 | room_number       | string     |                                |
-| building_type_id  | integer    | null: false, foreign_key: true  |
+| building_type_id  | integer    | null: false                |
 | user_id           | references | null: false, foreign_key: true  |
 
 ### Association
