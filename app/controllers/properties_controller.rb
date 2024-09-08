@@ -1,14 +1,14 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
   def index
-    @properties = Property.all 
+    @properties = Property.all
   end
 
-  def new 
-    @property = Property.new 
+  def new
+    @property = Property.new
   end
 
-  def create 
+  def create
     @property = Property.new(property_params)
     if @property.save
       redirect_to '/'
@@ -17,7 +17,7 @@ class PropertiesController < ApplicationController
     end
   end
 
-  def edit 
+  def edit
   end
 
   def update
@@ -30,13 +30,14 @@ class PropertiesController < ApplicationController
     redirect_to root_path
   end
 
-  private 
+  private
+
   def property_params
     params.require(:property).permit(:name, :postal_code, :prefecture_id,
-    :city, :street_number, :room_number, :building_type_id, :image).merge(user_id: current_user.id)
+                                     :city, :street_number, :room_number, :building_type_id, :image).merge(user_id: current_user.id)
   end
 
-  def set_property 
+  def set_property
     @property = Property.find(params[:id])
   end
 end

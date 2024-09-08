@@ -75,3 +75,7 @@ gem 'devise'
 gem 'active_hash'
 gem 'mini_magick'
 gem 'image_processing', '~> 1.2'
+
+group :development do
+  gem 'rubocop', require: false
+end

@@ -6,9 +6,8 @@ class BuildingType < ActiveHash::Base
     { id: 4, name: '鉄筋コンクリート造（RC造）' },
     { id: 5, name: '鉄筋鉄骨コンクリート造（SRC造）' },
     { id: 6, name: 'その他' }
-]
+  ]
 
   include ActiveHash::Associations
   has_many :properties
-
 end
