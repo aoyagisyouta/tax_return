@@ -32,7 +32,7 @@
 | Column         | Type       | Options                         |
 | -------------- | ---------- | ------------------------------  |
 | rent           | integer    | null: false, default: 0         |
-| key_money      | integer    | null: false, default: 0         |
+| key_money      | integer    |          |
 | renewal_fee    | integer    | null: false, default: 0         |
 | other_income   | integer    | null: false, default: 0         |
 | property_id    | references | null: false, foreign_key: true  |
