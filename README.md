@@ -31,10 +31,9 @@
 
 | Column         | Type       | Options                         |
 | -------------- | ---------- | ------------------------------  |
-| rent           | integer    | null: false, default: 0         |
-| key_money      | integer    |          |
-| renewal_fee    | integer    | null: false, default: 0         |
-| other_income   | integer    | null: false, default: 0         |
+| rent           | integer    | |
+| key_money      | integer    | |
+| other_income   | integer    | |
 | property_id    | references | null: false, foreign_key: true  |
 
 

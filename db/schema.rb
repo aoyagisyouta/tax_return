@@ -40,10 +40,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_15_053321) do
   end
 
   create_table "incomes", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "rent", null: false
+    t.integer "rent"
     t.integer "key_money"
-    t.integer "renewal_fee", null: false
-    t.integer "other_income", null: false
+    t.integer "other_income"
     t.bigint "property_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

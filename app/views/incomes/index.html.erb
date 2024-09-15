@@ -1,34 +1,77 @@
 <h1>収支一覧</h1>
 
 <% if @incomes.any? %>
+  <% # 年ごとに収支をグループ化 %>
+  <% grouped_by_year = @incomes.group_by { |income| income.created_at.year } %>
+
   <table>
     <thead>
       <tr>
+        <th>年</th>
+        <th>月</th>
         <th>家賃</th>
         <th>礼金</th>
-        <th>修繕費</th>
         <th>その他の収入</th>
         <th>月毎合計収入</th>
         <th>年毎合計収入</th>
       </tr>
     </thead>
     <tbody>
-      <%year_sum = 0%>
-      <% @incomes.each do |income| %>
-        <tr>
-          <td><%= income.rent %></td>
-          <td><%= income.key_money %></td>
-          <td><%= income.renewal_fee %></td>
-          <td><%= income.other_income %></td>
-          <td><%= mouns_sum = income.rent + income.key_money + income.renewal_fee + income.other_income%></td>
+      <% year_sum = 0 %>
+      <% grouped_by_year.each do |year, incomes_by_year| %>
+        <% grouped_by_month = incomes_by_year.group_by { |income| income.created_at.month } %>
         
-        <%year_sum += mouns_sum%>
+        <% month_sum = 0 %>
+        <% grouped_by_month.each do |month, incomes_by_month| %>
+          <% month_total = 0 %>
+          <tr>
+            <% if month == 1 %> <!-- 年ごとのタイトル行を表示 -->
+              <td rowspan="<%= grouped_by_month.size %>"><%= year %></td>
+            <% end %>
+            <td><%= month %></td>
+            <td>
+              <% incomes_by_month.each do |income| %>
+                <% rent_total = income.rent %>
+                <td><%= rent_total %></td>
+                <% month_total += rent_total %>
+              <% end %>
+            </td>
+            <td>
+              <% incomes_by_month.each do |income| %>
+                <% key_money_total = income.key_money %>
+                <td><%= key_money_total %></td>
+                <% month_total += key_money_total %>
+              <% end %>
+            </td>
+            <td>
+              <% incomes_by_month.each do |income| %>
+                <% other_income_total = income.other_income %>
+                <td><%= other_income_total %></td>
+                <% month_total += other_income_total %>
+              <% end %>
+            </td>
+            <td><%= month_total %></td>
+            <td></td> <!-- 年毎合計収入は後で表示 -->
+          </tr>
+          <% month_sum += month_total %>
+        <% end %>
+        <!-- 年毎合計収入を表示 -->
+        <tr>
+          <td></td>
+          <td>年合計</td>
+          <td colspan="5"></td>
+          <td><%= month_sum %></td>
+        </tr>
+        <% year_sum += month_sum %>
       <% end %>
-      <td><%= year_sum%><td>
+      <!-- 全体合計収入を表示 -->
+      <tr>
+        <td>全体合計</td>
+        <td colspan="6"></td>
+        <td><%= year_sum %></td>
       </tr>
     </tbody>
   </table>
 <% else %>
   <p>収支がありません。</p>
 <% end %>
-

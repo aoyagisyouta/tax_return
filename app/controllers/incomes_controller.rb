@@ -24,6 +24,6 @@ class IncomesController < ApplicationController
   private
 
   def income_params
-    params.require(:income).permit(:rent, :key_money, :renewal_fee, :other_income).merge(property_id: params[:property_id])
+    params.require(:income).permit(:rent, :key_money, :other_income).merge(property_id: params[:property_id])
   end
 end

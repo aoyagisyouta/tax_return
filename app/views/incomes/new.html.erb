@@ -3,7 +3,6 @@
 <%= form_with(model: [@property, @income], local: true) do |form| %>
   <%= form.text_field :rent, placeholder: "家賃" %>
   <%= form.text_field :key_money, placeholder: "礼金" %>
-  <%= form.text_field :renewal_fee, placeholder: "修繕費" %>
   <%= form.text_field :other_income, placeholder: "その他の収入" %>
   <%= form.submit "送信" %>
 <% end %>
