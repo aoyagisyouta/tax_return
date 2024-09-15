@@ -40,6 +40,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_15_053321) do
   end
 
   create_table "incomes", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
     t.integer "rent"
     t.integer "key_money"
     t.integer "other_income"
