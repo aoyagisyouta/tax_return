@@ -1,0 +1,66 @@
+<h1>収支一覧</h1>
+
+<% if @incomes.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>年</th>
+        <th>月</th>
+        <th>家賃</th>
+        <th>礼金</th>
+        <th>その他の収入</th>
+        <th>月毎合計収入</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% year_sum = 0 %>
+      <% grouped_by_year = @incomes.group_by { |income| income.year } %>
+
+      <% grouped_by_year.each do |year, incomes_by_year| %>
+        <% month_sum = 0 %>
+        <% grouped_by_month = incomes_by_year.group_by { |income| income.month } %>
+
+        <% grouped_by_month.each_with_index do |(month, incomes_by_month), index| %>
+          <% month_total = incomes_by_month.sum do |income| 
+            income.rent + income.key_money + income.other_income 
+          end %>
+
+          <tr>
+            <% if index == 0 %> <!-- 年ごとのタイトル行を最初の行に表示 -->
+              <td rowspan="<%= grouped_by_month.size %>"><%= year %></td>
+            <% end %>
+            <td><%= month %></td>
+            <td><%= incomes_by_month.sum(&:rent) %></td>
+            <td><%= incomes_by_month.sum(&:key_money) %></td>
+            <td><%= incomes_by_month.sum(&:other_income) %></td>
+            <td><%= month_total %></td>
+            <td></td> <!-- 年毎合計収入は後で表示 -->
+          </tr>
+
+          <% month_sum += month_total %>
+        <% end %>
+
+        <!-- 年毎合計収入を表示 -->
+        <tr>
+          <td colspan="2">年合計</td>
+          <td><%= incomes_by_year.sum(&:rent) %></td>
+          <td><%= incomes_by_year.sum(&:key_money) %></td>
+          <td><%= incomes_by_year.sum(&:other_income) %></td>
+          <td><%= month_sum %></td>
+          <td></td>
+        </tr>
+
+        <% year_sum += month_sum %>
+      <% end %>
+
+      <!-- 全体合計収入を表示 -->
+      <tr>
+        <td colspan="5">全体合計</td>
+        <td><%= year_sum %></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+<% else %>
+  <p>収支がありません。</p>
+<% end %>
