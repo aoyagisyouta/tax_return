@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   end
   resources :properties do 
     resources :incomes
+    resources :expenses
   end
   
 end
