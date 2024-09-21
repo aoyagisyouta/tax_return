@@ -40,8 +40,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_060659) do
   end
 
   create_table "expenses", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "year"
+    t.integer "month"
     t.integer "taxes", null: false
-    t.decimal "loan_interest_rate", precision: 5, scale: 2
+    t.integer "loan_interest_rate"
     t.integer "management_fee"
     t.integer "brokerage"
     t.integer "advertising"

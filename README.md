@@ -45,7 +45,7 @@
 | Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
 | taxes               | integer    | null: false, default: 0        |
-| loan_interest_rate  | decimal    | precision: 5, scale: 2         |
+| loan_interest_rate  | integer    |          |
 | management_fee      | integer    | null: false, default: 0        |
 | brokerage           | integer    | null: false, default: 0        |
 | advertising         | integer    | null: false, default: 0        |

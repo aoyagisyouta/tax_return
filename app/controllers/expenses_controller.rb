@@ -17,7 +17,7 @@ class ExpensesController < ApplicationController
   private
 
   def expense_params
-    params.require(:expense).permit(:taxes, :loan_interest_rate, :management_fee, :brokerage,
+    params.require(:expense).permit(:year, :month, :taxes, :loan_interest_rate, :management_fee, :brokerage,
                                     :advertising, :premium, :depreciation, :repair_cost, :other_expenses)
   end
 end

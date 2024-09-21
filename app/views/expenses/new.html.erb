@@ -3,6 +3,16 @@
 <%= form_with(model: [@property, @expense], local: true) do |form| %>
 
   <div>
+    <%= form.label :year, "年" %>
+    <%= form.number_field :year, value: params[:year] || Time.now.year, min: 1900, max: 2100 %>
+  </div>
+
+  <div>
+    <%= form.label :month, "月" %>
+    <%= form.number_field :month, value: params[:month] || Time.now.month, min: 1, max: 12 %>
+  </div>
+  
+  <div>
     <%= form.label :taxes, "税金" %>
     <%= form.text_field :taxes, placeholder: "税金" %>
   </div>
