@@ -39,25 +39,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_060659) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "expens", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "taxes", null: false
-    t.decimal "lone_interest_rate", precision: 5, scale: 2
-    t.integer "management_fee"
-    t.integer "brokerage"
-    t.integer "advertising"
-    t.integer "premium"
-    t.integer "depreciation"
-    t.integer "repair_cost"
-    t.integer "other_expenses"
-    t.bigint "property_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["property_id"], name: "index_expens_on_property_id"
-  end
-
   create_table "expenses", charset: "utf8mb4", force: :cascade do |t|
     t.integer "taxes", null: false
-    t.decimal "lone_interest_rate", precision: 5, scale: 2
+    t.decimal "loan_interest_rate", precision: 5, scale: 2
     t.integer "management_fee"
     t.integer "brokerage"
     t.integer "advertising"
@@ -112,7 +96,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_21_060659) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "expens", "properties"
   add_foreign_key "expenses", "properties"
   add_foreign_key "properties", "users"
 end

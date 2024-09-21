@@ -6,7 +6,7 @@ class ExpensesController < ApplicationController
 
   def create
     @property = Property.find(params[:property_id])
-    @expense = @property.expenses.build(expense_params)
+    @expense = @property.expense.build(expense_params)
     if @expense.save
       redirect_to property_incomes_path(@property)
     else

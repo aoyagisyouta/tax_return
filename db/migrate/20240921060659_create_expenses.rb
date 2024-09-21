@@ -2,7 +2,7 @@ class CreateExpenses < ActiveRecord::Migration[7.0]
   def change
     create_table :expenses do |t|
       t.integer :taxes, null: false
-      t.decimal :lone_interest_rate, precision: 5, scale: 2
+      t.decimal :loan_interest_rate, precision: 5, scale: 2
       t.integer :management_fee
       t.integer :brokerage
       t.integer :advertising

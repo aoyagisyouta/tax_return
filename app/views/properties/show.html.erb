@@ -13,5 +13,6 @@
   画像なし
 <% end %>
 
-<%= link_to '収支', new_property_income_path(@property) %>
+<%= link_to '経費', new_property_expense_path(@property) %>
+<%= link_to '収入', new_property_income_path(@property) %>
 <%= link_to '収支表', property_incomes_path(@property) %>
