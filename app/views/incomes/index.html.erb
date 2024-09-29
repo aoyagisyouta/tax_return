@@ -148,3 +148,32 @@
 <% else %>
   <p>経費がありません。</p>
 <% end %>
+
+<h2>年間ごとの純利益</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>年</th>
+      <th>総収入</th>
+      <th>総経費</th>
+      <th>純利益</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% income_yearly_totals = @incomes.group_by(&:year).transform_values { |incomes| incomes.sum { |income| income.rent + income.key_money + income.other_income } } %>
+    <% expense_yearly_totals = @expenses.group_by(&:year).transform_values { |expenses| expenses.sum { |expense| expense.taxes.to_i + expense.loan_interest_rate.to_i + expense.management_fee.to_i + expense.brokerage.to_i + expense.advertising.to_i + expense.premium.to_i + expense.depreciation.to_i + expense.repair_cost.to_i + expense.other_expenses.to_i } } %>
+
+    <% income_yearly_totals.each do |year, income_total| %>
+      <% expense_total = expense_yearly_totals[year] || 0 %>
+      <% net_profit = income_total - expense_total %>
+
+      <tr>
+        <td><%= year %></td>
+        <td><%= income_total %></td>
+        <td><%= expense_total %></td>
+        <td><%= net_profit %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
