@@ -14,7 +14,7 @@ class IncomesController < ApplicationController
     @property = Property.find(params[:property_id])
     @income = @property.incomes.build(income_params)
     if @income.save
-      redirect_to property_incomes_path(@property)
+      redirect_to property_path(@property)
     else
       render :new, status: :unprocessable_entity
     end

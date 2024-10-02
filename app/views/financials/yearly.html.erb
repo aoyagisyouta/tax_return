@@ -16,10 +16,13 @@
       <% @incomes.group_by(&:month).each do |month, incomes_by_month| %>
         <tr>
           <td><%= month %></td>
-          <td><%= incomes_by_month.sum(&:rent) %></td>
-          <td><%= incomes_by_month.sum(&:key_money) %></td>
-          <td><%= incomes_by_month.sum(&:other_income) %></td>
-          <td><%= incomes_by_month.sum { |income| income.rent + income.key_money + income.other_income } %></td>
+          <td><%= incomes_by_month.sum { |income| income.rent || 0 } %></td>
+          <td><%= incomes_by_month.sum { |income| income.key_money || 0 } %></td>
+          <td><%= incomes_by_month.sum { |income| income.other_income || 0 } %></td>
+          <td><%= incomes_by_month.sum do |income| 
+                (income.rent || 0) + (income.key_money || 0) + (income.other_income || 0) 
+              end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

@@ -9,11 +9,13 @@ class FinancialsController < ApplicationController
     @expenses = @property.expenses.where(year: @year)
 
     # 収入と経費の合計を計算
-    @income_total = @incomes.sum { |income| income.rent + income.key_money + income.other_income }
+    @income_total = @incomes.sum { |income| (income.rent || 0) + (income.key_money || 0) + (income.other_income || 0) }
     @expense_total = @expenses.sum do |expense|
-      expense.taxes.to_i + expense.loan_interest_rate.to_i + expense.management_fee.to_i +
-        expense.brokerage.to_i + expense.advertising.to_i + expense.premium.to_i +
-        expense.depreciation.to_i + expense.repair_cost.to_i + expense.other_expenses.to_i
+      (expense.taxes || 0).to_i + (expense.loan_interest_rate || 0).to_i +
+        (expense.management_fee || 0).to_i + (expense.brokerage || 0).to_i +
+        (expense.advertising || 0).to_i + (expense.premium || 0).to_i +
+        (expense.depreciation || 0).to_i + (expense.repair_cost || 0).to_i +
+        (expense.other_expenses || 0).to_i
     end
 
     def show
