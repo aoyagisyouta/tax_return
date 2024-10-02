@@ -1,10 +1,4 @@
 class IncomesController < ApplicationController
-  def index
-    @incomes = Income.all
-    @expenses = Expense.all
-    @grouped_expenses = @expenses.group_by { |expense| [expense.created_at.year, expense.created_at.month] }
-  end
-
   def new
     @property = Property.find(params[:property_id])
     @income = Income.new

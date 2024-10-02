@@ -8,7 +8,7 @@ class ExpensesController < ApplicationController
     @property = Property.find(params[:property_id])
     @expense = @property.expenses.build(expense_params)
     if @expense.save
-      redirect_to property_incomes_path(@property)
+      redirect_to property_path(@property)
     else
       render :new, status: :unprocessable_entity
     end

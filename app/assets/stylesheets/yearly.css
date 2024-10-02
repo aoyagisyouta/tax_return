@@ -1,0 +1,23 @@
+.financial-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.financial-table th, .financial-table td {
+  border: 1px solid #dddddd;
+  text-align: right;
+  padding: 8px;
+}
+
+.financial-table th {
+  background-color: #f2f2f2;
+}
+
+.financial-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.financial-table tr:hover {
+  background-color: #f1f1f1;
+}
