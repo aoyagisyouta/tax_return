@@ -1,0 +1,76 @@
+<h1><%= @property.name %> の <%= @year %>年 収支</h1>
+
+<h2>収入一覧</h2>
+<% if @incomes.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>月</th>
+        <th>家賃</th>
+        <th>礼金</th>
+        <th>その他の収入</th>
+        <th>月毎合計収入</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @incomes.group_by(&:month).each do |month, incomes_by_month| %>
+        <tr>
+          <td><%= month %></td>
+          <td><%= incomes_by_month.sum(&:rent) %></td>
+          <td><%= incomes_by_month.sum(&:key_money) %></td>
+          <td><%= incomes_by_month.sum(&:other_income) %></td>
+          <td><%= incomes_by_month.sum { |income| income.rent + income.key_money + income.other_income } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>収入がありません。</p>
+<% end %>
+
+<h2>経費一覧</h2>
+<% if @expenses.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>月</th>
+        <th>税金</th>
+        <th>金利</th>
+        <th>管理費</th>
+        <th>仲介手数料</th>
+        <th>広告費</th>
+        <th>保険料</th>
+        <th>減価償却</th>
+        <th>修理費</th>
+        <th>その他の経費</th>
+        <th>月毎合計経費</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @expenses.group_by(&:month).each do |month, expenses_by_month| %>
+        <tr>
+          <td><%= month %></td>
+          <td><%= expenses_by_month.sum { |e| e.taxes || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.loan_interest_rate || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.management_fee || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.brokerage || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.advertising || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.premium || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.depreciation || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.repair_cost || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.other_expenses || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.total || 0 } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>経費がありません。</p>
+<% end %>
+
+<h2>純利益</h2>
+<p>総収入: <%= @income_total %> 円</p>
+<p>総経費: <%= @expense_total %> 円</p>
+<p>純利益: <%= @net_profit %> 円</p>
+
+<%= link_to '戻る', property_path(@property) %>

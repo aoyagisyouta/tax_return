@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :properties do 
     resources :incomes
     resources :expenses
+    get 'financials/year/:year', to: 'financials#yearly', as: 'yearly_financials', on: :member
   end
   
 end

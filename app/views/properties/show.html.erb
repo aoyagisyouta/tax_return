@@ -16,3 +16,14 @@
 <%= link_to '経費', new_property_expense_path(@property) %>
 <%= link_to '収入', new_property_income_path(@property) %>
 <%= link_to '収支表', property_incomes_path(@property) %>
+
+<h1><%= @property.name %></h1>
+
+<p>収支を見る:</p>
+<ul>
+  <% @years.each do |year| %>
+    <li>
+      <%= link_to "#{year}年の収支を見る", yearly_financials_property_path(@property, year: year) %>
+    </li>
+  <% end %>
+</ul>

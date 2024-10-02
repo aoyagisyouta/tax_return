@@ -30,7 +30,19 @@ class PropertiesController < ApplicationController
     redirect_to root_path
   end
 
+  # app/controllers/properties_controller.rb
   def show
+    @property = Property.find(params[:id])
+
+    # 入力されている収支・経費データから年を取得
+    income_years = @property.incomes.pluck(:year).uniq
+    expense_years = @property.expenses.pluck(:year).uniq
+
+    # 収支と経費に含まれるすべての年を結合して一意にする
+    @years = (income_years + expense_years).uniq.sort
+
+    # @years が nil の場合は空配列を代入
+    @years ||= []
   end
 
   private
