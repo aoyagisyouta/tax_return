@@ -1,0 +1,62 @@
+<h1>経費入力欄</h1>
+
+<%= form_with(model: [@property, @expense], local: true) do |form| %>
+
+  <div>
+    <%= form.label :year, "年" %>
+    <%= form.number_field :year, value: params[:year] || Time.now.year, min: 1900, max: 2100 %>
+  </div>
+
+  <div>
+    <%= form.label :month, "月" %>
+    <%= form.number_field :month, value: params[:month] || Time.now.month, min: 1, max: 12 %>
+  </div>
+  
+  <div>
+    <%= form.label :taxes, "税金" %>
+    <%= form.text_field :taxes, placeholder: "税金" %>
+  </div>
+
+  <div>
+    <%= form.label :loan_interest_rate, "ローン金利" %>
+    <%= form.text_field :loan_interest_rate, placeholder: "ローン金利" %>
+  </div>
+
+  <div>
+    <%= form.label :management_fee, "管理費" %>
+    <%= form.text_field :management_fee, placeholder:"管理費" %>
+  </div>
+
+  <div>
+    <%= form.label :brokerage, "仲介手数料" %>
+    <%= form.text_field :brokerage, placeholder: "仲介手数料" %>
+  </div>
+
+    <div>
+    <%= form.label :advertising, "広告費" %>
+    <%= form.text_field :advertising, placeholder: "広告費" %>
+  </div>
+
+  <div>
+    <%= form.label :premium, "保険料" %>
+    <%= form.text_field :premium, placeholder: "保険料" %>
+  </div>
+
+    <div>
+    <%= form.label :depreciation, "減価償却費" %>
+    <%= form.text_field :depreciation, placeholder: "減価償却費" %>
+  </div>
+
+    <div>
+    <%= form.label :repair_cost, "修繕費" %>
+    <%= form.text_field :repair_cost, placeholder: "修繕費" %>
+  </div>
+
+    <div>
+    <%= form.label :other_expenses, "その他経費" %>
+    <%= form.text_field :other_expenses, placeholder: "その他経費" %>
+  </div>
+  <div>
+    <%= form.submit "送信" %>
+  </div>
+<% end %>

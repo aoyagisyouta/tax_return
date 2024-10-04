@@ -5,6 +5,7 @@ class Property < ApplicationRecord
   has_one_attached :image
   belongs_to :user
   has_many :incomes, dependent: :destroy
+  has_many :expenses, dependent: :destroy
 
   with_options presence: true do
     validates :name

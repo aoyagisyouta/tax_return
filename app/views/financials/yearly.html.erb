@@ -1,0 +1,90 @@
+<h1><%= @property.name %> の <%= @year %>年 収支</h1>
+
+<h2>収入一覧</h2>
+<% if @incomes.any? %>
+  <table class="financial-table">
+    <thead>
+      <tr>
+        <th>月</th>
+        <th>家賃</th>
+        <th>礼金</th>
+        <th>その他の収入</th>
+        <th>月毎合計収入</th>
+        <th>アクション</th>  <!-- アクション列を追加 -->
+      </tr>
+    </thead>
+    <tbody>
+      <% (1..12).each do |month| %>
+        <% incomes_by_month = @incomes.select { |income| income.month == month } %>
+        <tr>
+          <td><%= month %></td>
+          <td><%= incomes_by_month.sum { |income| income.rent || 0 } %></td>
+          <td><%= incomes_by_month.sum { |income| income.key_money || 0 } %></td>
+          <td><%= incomes_by_month.sum { |income| income.other_income || 0 } %></td>
+          <td><%= incomes_by_month.sum { |income| (income.rent || 0) + (income.key_money || 0) + (income.other_income || 0) } %></td>
+          <td>
+            <% if incomes_by_month.any? %>
+              <%= link_to '編集', edit_property_income_path(@property, incomes_by_month.first) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>収入がありません。</p>
+<% end %>
+
+<h2>経費一覧</h2>
+<% if @expenses.any? %>
+  <table class="financial-table">
+    <thead>
+      <tr>
+        <th>月</th>
+        <th>税金</th>
+        <th>金利</th>
+        <th>管理費</th>
+        <th>仲介手数料</th>
+        <th>広告費</th>
+        <th>保険料</th>
+        <th>減価償却</th>
+        <th>修理費</th>
+        <th>その他の経費</th>
+        <th>月毎合計経費</th>
+        <th>アクション</th>  <!-- アクション列を追加 -->
+      </tr>
+    </thead>
+    <tbody>
+      <% (1..12).each do |month| %>
+        <% expenses_by_month = @expenses.select { |e| e.month == month } %>
+        <tr>
+          <td><%= month %></td>
+          <td><%= expenses_by_month.sum { |e| e.taxes || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.loan_interest_rate || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.management_fee || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.brokerage || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.advertising || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.premium || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.depreciation || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.repair_cost || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| e.other_expenses || 0 } %></td>
+          <td><%= expenses_by_month.sum { |e| (e.taxes || 0) + (e.loan_interest_rate || 0) + (e.management_fee || 0) + (e.brokerage || 0) + (e.advertising || 0) + (e.premium || 0) + (e.depreciation || 0) + (e.repair_cost || 0) + (e.other_expenses || 0) } %></td>
+          <td>
+            <% if expenses_by_month.any? %>
+              <%= link_to '編集', edit_property_expense_path(@property, expenses_by_month.first) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>経費がありません。</p>
+<% end %>
+
+<h2>純利益</h2>
+<p>総収入: <%= @income_total %> 円</p>
+<p>総経費: <%= @expense_total %> 円</p>
+<p>純利益: <%= @net_profit %> 円</p>
+
+<%= link_to '戻る', property_path(@property) %>

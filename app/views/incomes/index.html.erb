@@ -14,11 +14,11 @@
     </thead>
     <tbody>
       <% year_sum = 0 %>
-      <% grouped_by_year = @incomes.group_by { |income| income.year } %>
+      <% grouped_by_year = @incomes.group_by { |income| income.year }.sort_by { |year, _| -year } %>
 
       <% grouped_by_year.each do |year, incomes_by_year| %>
         <% month_sum = 0 %>
-        <% grouped_by_month = incomes_by_year.group_by { |income| income.month } %>
+        <% grouped_by_month = incomes_by_year.group_by { |income| income.month }.sort_by { |month, _| -month } %>
 
         <% grouped_by_month.each_with_index do |(month, incomes_by_month), index| %>
           <% month_total = incomes_by_month.sum do |income| 
@@ -34,7 +34,6 @@
             <td><%= incomes_by_month.sum(&:key_money) %></td>
             <td><%= incomes_by_month.sum(&:other_income) %></td>
             <td><%= month_total %></td>
-            <td></td> <!-- 年毎合計収入は後で表示 -->
           </tr>
 
           <% month_sum += month_total %>
@@ -47,7 +46,6 @@
           <td><%= incomes_by_year.sum(&:key_money) %></td>
           <td><%= incomes_by_year.sum(&:other_income) %></td>
           <td><%= month_sum %></td>
-          <td></td>
         </tr>
 
         <% year_sum += month_sum %>
@@ -57,10 +55,125 @@
       <tr>
         <td colspan="5">全体合計</td>
         <td><%= year_sum %></td>
-        <td></td>
       </tr>
     </tbody>
   </table>
 <% else %>
   <p>収支がありません。</p>
 <% end %>
+
+<h1>経費一覧</h1>
+
+<% if @expenses.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>年</th>
+        <th>月</th>
+        <th>税金</th>
+        <th>金利</th>
+        <th>管理費</th>
+        <th>仲介手数料</th>
+        <th>広告費</th>
+        <th>保険料</th>
+        <th>減価償却</th>
+        <th>修理費</th>
+        <th>その他の経費</th>
+        <th>物件</th>
+        <th>月毎合計経費</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% year_sum = 0 %>
+      <% grouped_by_year = @expenses.group_by { |expense| expense.year }.sort_by { |year, _| -year } %>
+
+      <% grouped_by_year.each do |year, expenses_by_year| %>
+        <% month_sum = 0 %>
+        <% grouped_by_month = expenses_by_year.group_by { |expense| expense.month }.sort_by { |month, _| -month } %>
+
+        <% grouped_by_month.each_with_index do |(month, expenses_by_month), index| %>
+          <% month_total = expenses_by_month.sum do |expense| 
+            expense.taxes.to_i + expense.loan_interest_rate.to_i + expense.management_fee.to_i +
+            expense.brokerage.to_i + expense.advertising.to_i + expense.premium.to_i +
+            expense.depreciation.to_i + expense.repair_cost.to_i + expense.other_expenses.to_i
+          end %>
+
+          <tr>
+            <% if index == 0 %> <!-- 年ごとのタイトル行を最初の行に表示 -->
+              <td rowspan="<%= grouped_by_month.size %>"><%= year %></td>
+            <% end %>
+            <td><%= month %></td>
+            <td><%= expenses_by_month.sum { |e| e.taxes || 0 } %></td>
+            <td><%= expenses_by_month.sum { |e| e.loan_interest_rate || 0 } %></td>
+            <td><%= expenses_by_month.sum { |e| e.management_fee || 0 } %></td>
+            <td><%= expenses_by_month.sum { |e| e.brokerage || 0 } %></td>
+            <td><%= expenses_by_month.sum { |e| e.advertising || 0 } %></td>
+            <td><%= expenses_by_month.sum { |e| e.premium || 0 } %></td>
+            <td><%= expenses_by_month.sum { |e| e.depreciation || 0 } %></td>
+            <td><%= expenses_by_month.sum { |e| e.repair_cost || 0 } %></td>
+            <td><%= expenses_by_month.sum { |e| e.other_expenses || 0 } %></td>
+            <td><%= expenses_by_month.first.property.name if expenses_by_month.first.property %></td>
+            <td><%= month_total %></td>
+          </tr>
+
+          <% month_sum += month_total %>
+        <% end %>
+
+        <!-- 年毎合計経費を表示 -->
+        <tr>
+          <td colspan="2">年合計</td>
+          <td><%= expenses_by_year.sum { |e| e.taxes || 0 } %></td>
+          <td><%= expenses_by_year.sum { |e| e.loan_interest_rate || 0 } %></td>
+          <td><%= expenses_by_year.sum { |e| e.management_fee || 0 } %></td>
+          <td><%= expenses_by_year.sum { |e| e.brokerage || 0 } %></td>
+          <td><%= expenses_by_year.sum { |e| e.advertising || 0 } %></td>
+          <td><%= expenses_by_year.sum { |e| e.premium || 0 } %></td>
+          <td><%= expenses_by_year.sum { |e| e.depreciation || 0 } %></td>
+          <td><%= expenses_by_year.sum { |e| e.repair_cost || 0 } %></td>
+          <td><%= expenses_by_year.sum { |e| e.other_expenses || 0 } %></td>
+          <td></td>
+          <td><%= month_sum %></td>
+        </tr>
+
+        <% year_sum += month_sum %>
+      <% end %>
+
+      <!-- 全体合計経費を表示 -->
+      <tr>
+        <td colspan="11">全体合計</td>
+        <td><%= year_sum %></td>
+      </tr>
+    </tbody>
+  </table>
+<% else %>
+  <p>経費がありません。</p>
+<% end %>
+
+<h2>年間ごとの純利益</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>年</th>
+      <th>総収入</th>
+      <th>総経費</th>
+      <th>純利益</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% income_yearly_totals = @incomes.group_by(&:year).transform_values { |incomes| incomes.sum { |income| income.rent + income.key_money + income.other_income } } %>
+    <% expense_yearly_totals = @expenses.group_by(&:year).transform_values { |expenses| expenses.sum { |expense| expense.taxes.to_i + expense.loan_interest_rate.to_i + expense.management_fee.to_i + expense.brokerage.to_i + expense.advertising.to_i + expense.premium.to_i + expense.depreciation.to_i + expense.repair_cost.to_i + expense.other_expenses.to_i } } %>
+
+    <% income_yearly_totals.each do |year, income_total| %>
+      <% expense_total = expense_yearly_totals[year] || 0 %>
+      <% net_profit = income_total - expense_total %>
+
+      <tr>
+        <td><%= year %></td>
+        <td><%= income_total %></td>
+        <td><%= expense_total %></td>
+        <td><%= net_profit %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
