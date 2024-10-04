@@ -1,28 +1,36 @@
-<h1>物件詳細</h1>
+<div class="property-details">
+  <h1>物件詳細</h1>
 
-<%= @property.name %>
-<%= @property.postal_code %>
-<%= @property.prefecture[:name] %>
-<%= @property.city %>
-<%= @property.street_number %>
-<%= @property.room_number %>
-<%= @property.building_type[:id] %>
-<% if @property.image.attached? %>
-  <%= image_tag @property.image, class: 'propeerty-image'if @property.image.attached? %>
-<% else %>
-  画像なし
-<% end %>
+  <ul class="property-info">
+    <li><span>物件名:</span> <%= @property.name %></li>
+    <li><span>郵便番号:</span> <%= @property.postal_code %></li>
+    <li><span>都道府県:</span> <%= @property.prefecture[:name] %></li>
+    <li><span>市区町村:</span> <%= @property.city %></li>
+    <li><span>丁目番地:</span> <%= @property.street_number %></li>
+    <li><span>部屋番号:</span> <%= @property.room_number %></li>
+    <li><span>建物の種類:</span> <%= @property.building_type[:name] %></li>
+  </ul>
 
-<%= link_to '経費', new_property_expense_path(@property) %>
-<%= link_to '収入', new_property_income_path(@property) %>
-
-<h1><%= @property.name %></h1>
-
-<p>収支を見る:</p>
-<ul>
-  <% @years.each do |year| %>
-    <li>
-      <%= link_to "#{year}年の収支を見る", yearly_financials_property_path(@property, year: year) %>
-    </li>
+  <% if @property.image.attached? %>
+    <%= image_tag @property.image, class: 'property-image' %>
+  <% else %>
+    <p>画像なし</p>
   <% end %>
-</ul>
+
+  <div class="property-actions">
+    <%= link_to '経費入力', new_property_expense_path(@property) %>
+    <%= link_to '収入入力', new_property_income_path(@property) %>
+  </div>
+
+  <h1><%= @property.name %> の収支</h1>
+  <div class="yearly-financials">
+    <p>収支を見る:</p>
+    <ul>
+      <% @years.each do |year| %>
+        <li>
+          <%= link_to "#{year}年の収支を見る", yearly_financials_property_path(@property, year: year) %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

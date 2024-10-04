@@ -2,7 +2,7 @@
 
 
 .properties {
-  max-width: 1200px;
+  max-width: 1800px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -76,9 +76,9 @@ table tbody td a:hover {
   color: #555;
 }
 
-/*物件登録欄のcss*/
+/*物件登録・編集ページのcss*/
 
-/* 全体レイアウト */
+
 .contents {
   display: flex;
   justify-content: center;
@@ -94,7 +94,7 @@ table tbody td a:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* フォーム全体 */
+
 form {
   display: flex;
   flex-direction: column;
@@ -114,7 +114,6 @@ input[type="text"]::placeholder {
   color: #aaa;
 }
 
-/* セレクトボックスのスタイル */
 .prefecture-select, .building_type-select {
   width: 100%;
   padding: 10px;
@@ -124,7 +123,6 @@ input[type="text"]::placeholder {
   background-color: #fff;
 }
 
-/* 送信ボタンのスタイル */
 input[type="submit"] {
   padding: 12px 20px;
   background-color: #007bff;
@@ -140,7 +138,6 @@ input[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-/* エラーメッセージ */
 .error-messages {
   background-color: #ffdddd;
   border-left: 6px solid #f44336;
@@ -157,4 +154,87 @@ input[type="submit"]:hover {
 .error-messages li {
   color: #d8000c;
   font-size: 14px;
+}
+
+/*物件詳細ページのcss*/
+
+
+.property-details {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.property-details h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+
+.property-info {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.property-info li {
+  padding: 8px 0;
+  font-size: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+.property-info li span {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.property-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  display: block;
+}
+
+
+.property-actions a {
+  display: inline-block;
+  margin-right: 10px;
+  text-decoration: none;
+  color: #007bff;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border: 1px solid #007bff;
+  transition: background-color 0.3s ease;
+}
+
+.property-actions a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+
+.yearly-financials ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.yearly-financials ul li {
+  margin: 8px 0;
+}
+
+.yearly-financials ul li a {
+  color: #007bff;
+  text-decoration: none;
+  padding: 8px;
+  transition: color 0.3s ease;
+}
+
+.yearly-financials ul li a:hover {
+  color: #0056b3;
+  text-decoration: underline;
 }
