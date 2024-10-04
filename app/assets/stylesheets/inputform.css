@@ -1,0 +1,63 @@
+/*収入入力・編集ページcss*/
+
+.income-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.income-form h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.income-form div {
+  margin-bottom: 15px;
+}
+
+.income-form label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+
+.income-form input[type="text"],
+.income-form input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.income-form input[type="text"]:focus,
+.income-form input[type="number"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+
+.income-form input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.income-form input[type="submit"]:hover {
+  background-color: #0056b3;
+}
