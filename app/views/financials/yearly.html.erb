@@ -10,6 +10,7 @@
         <th>礼金</th>
         <th>その他の収入</th>
         <th>月毎合計収入</th>
+        <th>アクション</th>  <!-- アクション列を追加 -->
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,11 @@
           <td><%= incomes_by_month.sum { |income| income.key_money || 0 } %></td>
           <td><%= incomes_by_month.sum { |income| income.other_income || 0 } %></td>
           <td><%= incomes_by_month.sum { |income| (income.rent || 0) + (income.key_money || 0) + (income.other_income || 0) } %></td>
+          <td>
+            <% if incomes_by_month.any? %>
+              <%= link_to '編集', edit_property_income_path(@property, incomes_by_month.first) %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -45,6 +51,7 @@
         <th>修理費</th>
         <th>その他の経費</th>
         <th>月毎合計経費</th>
+        <th>アクション</th>  <!-- アクション列を追加 -->
       </tr>
     </thead>
     <tbody>
@@ -62,6 +69,11 @@
           <td><%= expenses_by_month.sum { |e| e.repair_cost || 0 } %></td>
           <td><%= expenses_by_month.sum { |e| e.other_expenses || 0 } %></td>
           <td><%= expenses_by_month.sum { |e| (e.taxes || 0) + (e.loan_interest_rate || 0) + (e.management_fee || 0) + (e.brokerage || 0) + (e.advertising || 0) + (e.premium || 0) + (e.depreciation || 0) + (e.repair_cost || 0) + (e.other_expenses || 0) } %></td>
+          <td>
+            <% if expenses_by_month.any? %>
+              <%= link_to '編集', edit_property_expense_path(@property, expenses_by_month.first) %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
