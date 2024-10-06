@@ -44,15 +44,15 @@
 
 | Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
-| taxes               | integer    | null: false, default: 0        |
-| loan_interest_rate  | integer    |          |
-| management_fee      | integer    | null: false, default: 0        |
-| brokerage           | integer    | null: false, default: 0        |
-| advertising         | integer    | null: false, default: 0        |
-| premium             | integer    | null: false, default: 0        |
-| depreciation        | integer    | null: false, default: 0        |
-| repair_cost         | integer    | null: false, default: 0        |
-| other_expenses      | integer    | null: false, default: 0        |
+| taxes               | integer    |              |
+| loan_interest_rate  | integer    |              |
+| management_fee      | integer    |              |
+| brokerage           | integer    |              |
+| advertising         | integer    |              |
+| premium             | integer    |              |
+| depreciation        | integer    |              |
+| repair_cost         | integer    |              |
+| other_expenses      | integer    |              |
 | property_id         | references | null: false, foreign_key: true |
 
 ### Association

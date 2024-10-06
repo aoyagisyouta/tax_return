@@ -12,12 +12,14 @@
     <% end %>
     <%= form_with(model: @property, local: true) do |form| %>
       <%= form.text_field :name, placeholder: "物件名" %>
-      <%= form.text_field :postal_code, placeholder: "郵便番号" %>
+      <%= form.text_field :postal_code, placeholder: "郵便番号  （例  123-4567" %>
       <%= form.collection_select(:prefecture_id, Prefecture.all, :id, :name, {}, {class:"prefecture-select"}) %>
       <%= form.text_field :city, placeholder: "市町村" %>
       <%= form.text_field :street_number, placeholder: "番地" %>
       <%= form.text_field :room_number, placeholder: "部屋番号" %>
       <%= form.collection_select(:building_type_id, BuildingType.all, :id, :name, {}, {class:"building_type-select"}) %>
+      <%= form.label :construction_date, "建築日" %>
+      <%= form.date_select :construction_date, { start_year: 1900, end_year: Time.now.year }, { prompt: { day: '日', month: '月', year: '年' } } %>
       <%= form.file_field :image %>
       <%= form.submit "SEND" %>
     <% end %>
