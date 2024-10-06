@@ -10,7 +10,7 @@
         <th>礼金</th>
         <th>その他の収入</th>
         <th>月毎合計収入</th>
-        <th>アクション</th>  <!-- アクション列を追加 -->
+        <th>アクション</th>
       </tr>
     </thead>
     <tbody>
@@ -51,7 +51,7 @@
         <th>修理費</th>
         <th>その他の経費</th>
         <th>月毎合計経費</th>
-        <th>アクション</th>  <!-- アクション列を追加 -->
+        <th>アクション</th>
       </tr>
     </thead>
     <tbody>
@@ -83,8 +83,9 @@
 <% end %>
 
 <h2>純利益</h2>
-<p>総収入: <%= @income_total %> 円</p>
-<p>総経費: <%= @expense_total %> 円</p>
-<p>純利益: <%= @net_profit %> 円</p>
-
+<div class="income">
+  <p>総収入: <b><%= @income_total %> 円</b></p>
+  <p>総経費: <b><%= @expense_total %> 円</b></p>
+  <p class="<%= @net_profit < 0 ? 'negative-profit' : 'positive-profit' %>">純利益: <b><%= @net_profit %> 円</b></p>
+</div>
 <%= link_to '戻る', property_path(@property) %>
