@@ -12,6 +12,7 @@
 
 .financial-table th {
   background-color: #f2f2f2;
+  color: black;
 }
 
 .financial-table tr:nth-child(even) {
@@ -20,4 +21,18 @@
 
 .financial-table tr:hover {
   background-color: #f1f1f1;
+}
+
+.income{
+  border:1px solid #dddddd;
+  width: 40%;
+  background-color: #dddddd;
+}
+
+.negative-profit{
+  color: red;
+}
+
+.positive-profit{
+  color: green;
 }
