@@ -5,6 +5,7 @@
     <table>
       <thead>
         <tr>
+          <th>建築日</th>
           <th>物件名</th>
           <th>郵便番号</th>
           <th>都道府県</th>
@@ -19,6 +20,7 @@
       <tbody>
         <% @properties.each do |property| %>
           <tr>
+            <td><%= property.construction_date %></td>
             <td><%= property.name %></td>
             <td><%= property.postal_code %></td>
             <td><%= property.prefecture[:name] %></td>
