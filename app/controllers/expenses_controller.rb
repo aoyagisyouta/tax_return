@@ -1,6 +1,9 @@
 class ExpensesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit]
   before_action :set_property
   before_action :set_expense, only: [:edit, :update]
+  before_action -> { check_user(@property) }, only: [:new, :create]
+  before_action -> { check_user(@expense.property) }, only: [:edit, :update]
 
   def new
     @expense = Expense.new

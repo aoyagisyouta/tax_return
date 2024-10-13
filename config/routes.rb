@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     root to: "properties#index"
   end
   resources :properties do 
+    collection do
+      get :my_properties
+    end
     resources :incomes
     resources :expenses
     get 'financials/year/:year', to: 'financials#yearly', as: 'yearly_financials', on: :member

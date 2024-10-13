@@ -1,6 +1,9 @@
 class IncomesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit]
   before_action :set_property
   before_action :set_income, only: [:edit, :update]
+  before_action -> { check_user(@property) }, only: [:new, :create]
+  before_action -> { check_user(@income.property) }, only: [:edit, :update]
 
   def new
     @income = Income.new

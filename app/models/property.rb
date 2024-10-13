@@ -7,12 +7,13 @@ class Property < ApplicationRecord
   has_many :incomes, dependent: :destroy
   has_many :expenses, dependent: :destroy
 
-  with_options presence: true do
-    validates :name
-    validates :postal_code
-    validates :prefecture_id, numericality: { other_than: 1 }
-    validates :city
-    validates :street_number
-    validates :building_type_id, numericality: { other_than: 1 }
-  end
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :postal_code, presence: true, format: { with: /\A\d{3}-\d{4}\z/, message: 'はXXX-XXXXの形式で入力してください。' }
+  validates :prefecture_id, presence: true, numericality: { only_integer: true, greater_than: 1, message: 'を選択してください' }
+  validates :city, presence: true, length: { maximum: 50 }
+  validates :street_number, presence: true, length: { maximum: 50 }
+  validates :room_number, length: { maximum: 50 }, allow_blank: true
+  validates :building_type_id, presence: true, numericality: { only_integer: true, greater_than: 1, message: 'を選択してください' }
+  validates :user_id, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :construction_date, presence: true
 end

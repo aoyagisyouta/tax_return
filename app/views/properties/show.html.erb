@@ -2,6 +2,7 @@
   <h1>物件詳細</h1>
 
   <ul class="property-info">
+    <li><span>建築日:</span> <%= @property.construction_date %></li>
     <li><span>物件名:</span> <%= @property.name %></li>
     <li><span>郵便番号:</span> <%= @property.postal_code %></li>
     <li><span>都道府県:</span> <%= @property.prefecture[:name] %></li>
@@ -17,10 +18,12 @@
     <p>画像なし</p>
   <% end %>
 
-  <div class="property-actions">
-    <%= link_to '経費入力', new_property_expense_path(@property) %>
-    <%= link_to '収入入力', new_property_income_path(@property) %>
-  </div>
+  <% if user_signed_in? && current_user.id == @property.user_id %>
+    <div class="property-actions">
+      <%= link_to '経費入力', new_property_expense_path(@property) %>
+      <%= link_to '収入入力', new_property_income_path(@property) %>
+    </div>
+  <% end %>
 
   <h1><%= @property.name %> の収支</h1>
   <div class="yearly-financials">

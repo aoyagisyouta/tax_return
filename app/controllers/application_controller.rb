@@ -6,4 +6,11 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:user_name])
   end
+
+  def check_user(resource)
+    return if current_user.id == resource.user_id
+
+    flash[:alert] = 'アクセス権限がありません。'
+    redirect_to root_path
+  end
 end
