@@ -32,6 +32,10 @@ class PropertiesController < ApplicationController
     redirect_to root_path
   end
 
+  def my_properties
+    @properties = current_user.properties
+  end
+
   def show
     @property = Property.find(params[:id])
 
