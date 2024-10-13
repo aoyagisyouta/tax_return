@@ -21,6 +21,8 @@
       <%= form.label :construction_date, "建築日" %>
       <%= form.date_select :construction_date, { start_year: 1900, end_year: Time.now.year }, { prompt: { day: '日', month: '月', year: '年' } } %>
       <%= form.file_field :image %>
+      <%= form.label :is_public, "この物件情報を公開する" %>
+      <%= form.check_box :is_public %>
       <%= form.submit "SEND" %>
     <% end %>
     

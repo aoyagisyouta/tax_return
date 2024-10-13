@@ -3,7 +3,7 @@ class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
   before_action -> { check_user(@property) }, only: [:edit, :update, :destroy]
   def index
-    @properties = Property.all
+    @properties = Property.where(is_public: true)
   end
 
   def new
@@ -47,7 +47,7 @@ class PropertiesController < ApplicationController
 
   def property_params
     params.require(:property).permit(:name, :postal_code, :prefecture_id,
-                                     :city, :street_number, :room_number, :building_type_id, :construction_date, :image).merge(user_id: current_user.id)
+                                     :city, :street_number, :room_number, :building_type_id, :construction_date, :image, :is_public).merge(user_id: current_user.id)
   end
 
   def set_property

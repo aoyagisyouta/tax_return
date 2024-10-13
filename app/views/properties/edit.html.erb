@@ -19,6 +19,8 @@
       <%= form.text_field :room_number, placeholder: "部屋番号" %>
       <%= form.collection_select(:building_type_id, BuildingType.all, :id, :name, {}, {class:"building_type-select"}) %>
       <%= form.file_field :image %>
+      <%= form.label :is_public, "この物件情報を公開する" %>
+      <%= form.check_box :is_public %>
       <%= form.submit "SEND" %>
     <% end %>
     

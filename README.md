@@ -13,6 +13,7 @@
 
 | Column            | Type       | Options                        |
 | ----------------- | ---------- | ------------------------------ |
+| construction_date | date       | null: false                     |
 | name              | string     | null: false                     |
 | postal_code       | string     | null: false                     |
 | prefecture_id     | integer    | null: false, foreign_key: true  |
