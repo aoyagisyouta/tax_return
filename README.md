@@ -10,6 +10,9 @@
   ![トップページ](public/images/787d30ca0f12c57b0e64beb9463ded0a.png)
 
   物件登録画面
+  ![投稿画面](public/images/02e7b79f2db467aa0e27080d17191ef2.gif)
+
+  最後にチェックすることで物件情報が公開される
 
 
 
