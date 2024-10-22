@@ -9,10 +9,14 @@
   トップページ
   ![トップページ](public/images/787d30ca0f12c57b0e64beb9463ded0a.png)
 
+-------------------------------------------
+
   物件登録画面
   ![投稿画面](public/images/02e7b79f2db467aa0e27080d17191ef2.gif)
 
   ※最後にチェックすることで物件情報が公開される
+
+-------------------------------------------
 
   経費入力画面
   ![経費入力欄](public/images/cdc2d8a63ef9beaca5a47c0a2ebcf049.gif)
@@ -21,6 +25,8 @@
   [![Image from Gyazo](https://i.gyazo.com/2d5af2edfc305921403afca2b1a6c647.gif)](https://gyazo.com/2d5af2edfc305921403afca2b1a6c647)
 
   物件詳細画面から収支の入力欄に行ける
+
+--------------------------------------------
 
 
 
