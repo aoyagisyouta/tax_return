@@ -5,7 +5,7 @@
   また、物件の売却を希望している場合は物件情報を公開することもできます。
 
 操作画面
-  ![トップページ](/Users/aoyagishouta/projects/tax_return/public/images/06dc5d1581a0db8974c3405cd339d9c1.jpg)
+  ![トップページ](public/images/06dc5d1581a0db8974c3405cd339d9c1.jpg)
 
 
 
