@@ -7,7 +7,7 @@
 ## 操作画面
 
   トップページ
-  ![トップページ](public/images/787d30ca0f12c57b0e64beb9463ded0a)
+  ![トップページ](public/images/787d30ca0f12c57b0e64beb9463ded0a.png)
 
   物件登録画面
 
