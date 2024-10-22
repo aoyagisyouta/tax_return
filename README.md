@@ -31,7 +31,7 @@
   収支表
   [![Image from Gyazo](https://i.gyazo.com/f11071b6abb8e14d0d470471d35ca0df.gif)](https://gyazo.com/f11071b6abb8e14d0d470471d35ca0df)
 
-  入力された年のページが生成され、収支欄に表示される
+  入力された年のページが生成され、収支欄に表示される。未入力の場合は0で表示される。
 
 
 
